@@ -1,0 +1,5 @@
+#!/usr/bin/python3
+
+hostname = 'example'
+port = 12345
+fastd_sock_path = "/var/run/fastd.sock"
