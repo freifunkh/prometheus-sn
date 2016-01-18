@@ -26,8 +26,8 @@ def status():
     online = len(list(filter(lambda p: p['connection'] is not None, peers)))
     offline = len(peers) - online
 
-    yield dict(name='peer_count', value=online, online='true')
-    yield dict(name='peer_count', value=offline, online='false')
+    yield dict(name='fastd_peer_count', value=online, online='true')
+    yield dict(name='fastd_peer_count', value=offline, online='false')
 
 
 for s in status():
