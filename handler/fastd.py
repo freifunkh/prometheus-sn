@@ -1,12 +1,14 @@
 #!/usr/bin/python3
 
+import sys
 import json
 import socket
-import config
+
+socket_path = sys.argv[1]
 
 def get():
     client = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-    client.connect(config.fastd_sock_path)
+    client.connect(socket_path)
 
     res = bytes()
     while True:
@@ -24,7 +26,11 @@ def status():
     online = len(list(filter(lambda p: p['connection'] is not None, peers)))
     offline = len(peers) - online
 
-    yield 'peer_count', online, { 'online': 'true' }
-    yield 'peer_count', offline, { 'online': 'false' }
+    yield dict(name='peer_count', value=online, online='true')
+    yield dict(name='peer_count', value=offline, online='false')
 
-name = 'fastd'
+
+for s in status():
+    print(json.dumps(s))
+
+
