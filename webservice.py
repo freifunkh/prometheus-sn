@@ -1,7 +1,14 @@
 #!/usr/bin/python3
 
+import sys
 import json
 import http.server
+
+if len(sys.argv) < 2:
+    sys.stderr.write('USAGE: %s <hostname>\n' % sys.argv[0])
+    exit(1)
+
+hostname = sys.argv[1]
 
 def format_attrs(attrs):
     ret = [ k + '="' + v + '"' for k, v in attrs.items() ]
@@ -20,6 +27,8 @@ def handle_request():
 
             del j['name']
             del j['value']
+
+            j['hostname'] = hostname
 
             yield name + format_attrs(j) + ' ' + str(value)
 
