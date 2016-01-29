@@ -6,5 +6,4 @@ now=$(date +%s)
 
 delta=$(expr $now - $since)
 
-echo "{ \"name\": \"uptime\", \"value\": \"$delta\" }"
-
+echo uptime $delta

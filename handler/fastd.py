@@ -6,6 +6,12 @@ import socket
 
 socket_path = sys.argv[1]
 
+def format_output(name, attrs, value):
+    ret = [ k + '="' + v + '"' for k, v in attrs.items() ]
+
+    return name + '{' + ','.join(ret) + '} ' + str(value)
+
+
 def get():
     client = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     client.connect(socket_path)
@@ -19,6 +25,7 @@ def get():
 
     return json.loads(res.decode('utf-8'))
 
+
 def status():
     json_res = get()
     peers = json_res['peers'].values()
@@ -26,11 +33,9 @@ def status():
     online = len(list(filter(lambda p: p['connection'] is not None, peers)))
     offline = len(peers) - online
 
-    yield dict(name='fastd_peer_count', value=online, online='true')
-    yield dict(name='fastd_peer_count', value=offline, online='false')
+    print(format_output('fastd_peer_count', dict(online='true'), online))
+    print(format_output('fastd_peer_count', dict(online='false'), offline))
 
 
-for s in status():
-    print(json.dumps(s))
-
-
+if __name__ == '__main__':
+    status()

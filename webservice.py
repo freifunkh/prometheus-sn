@@ -10,27 +10,9 @@ if len(sys.argv) < 2:
 
 hostname = sys.argv[1]
 
-def format_attrs(attrs):
-    ret = [ k + '="' + v + '"' for k, v in attrs.items() ]
-
-    return '{' + ','.join(ret) + '}'
-    
-    
-
 def handle_request():
-    with open('/tmp/prometheus-source.jsons') as f:
-        for line in f:
-            j = json.loads(line)
-
-            name = j['name']
-            value = j['value']
-
-            del j['name']
-            del j['value']
-
-            j['hostname'] = hostname
-
-            yield name + format_attrs(j) + ' ' + str(value)
+    with open('/tmp/prometheus.metrics') as f:
+        return f.read()
 
     
 class Handler(http.server.BaseHTTPRequestHandler):
@@ -38,8 +20,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
         result = ""
         try:
-            for line in handle_request():
-                result += line + '\n'
+            result = handle_request()
 
             self.send_response(200)
             self.send_header('Content-type', 'text/plain')
