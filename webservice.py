@@ -4,12 +4,6 @@ import sys
 import json
 import http.server
 
-if len(sys.argv) < 2:
-    sys.stderr.write('USAGE: %s <hostname>\n' % sys.argv[0])
-    exit(1)
-
-hostname = sys.argv[1]
-
 def handle_request():
     with open('/tmp/prometheus.metrics') as f:
         return f.read()
