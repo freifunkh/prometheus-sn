@@ -28,12 +28,12 @@ def read(lines, tag):
 
         p = {
             'type': ':'.join(stack),
-            'packets': l[1].split(':')[1],
+            'frames': l[1].split(':')[1],
             'bytes': l[2].split(':')[1],
             'tag': ',tag="%s"' % tag if tag else ""
         }
         
-        print('tshark_packets{{type="{type}"{tag}}} {packets}'.format(**p))
+        print('tshark_frames{{type="{type}"{tag}}} {frames}'.format(**p))
         print('tshark_bytes{{type="{type}"{tag}}} {bytes}'.format(**p))
 
 
