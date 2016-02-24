@@ -19,7 +19,7 @@ interface_stats() {
 	echo if_packets_rx{interface=\"$interface\"} $packets_rx
 }
 
-interfaces=$(netstat -i | tail -n +3 | cut -d " " -f 1 | grep -v lo)
+interfaces=$(ip l | grep  -v "link" | cut -f 2 -d " " | tr -d ':' | grep -v lo)
 
 for i in $interfaces; do
 	interface_stats $i
