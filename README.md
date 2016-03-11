@@ -8,6 +8,7 @@ relevated information on the gateways.
 1. Download
 
 ```
+apt-get install curl
 git clone <url>
 ```
 
