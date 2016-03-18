@@ -19,7 +19,7 @@ interface_stats() {
 	echo if_packets_rx{interface=\"$interface\"} $packets_rx
 }
 
-interfaces=$(ip l | grep  -v "link" | cut -f 2 -d " " | tr -d ':' | grep -v lo)
+interfaces=$(ls /sys/class/net)
 
 for i in $interfaces; do
 	interface_stats $i
