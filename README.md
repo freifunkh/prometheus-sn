@@ -5,14 +5,14 @@ relevated information on the gateways.
 
 # installation
 
-1. Download
+## 1. Download
 
 
     apt-get install curl
     git clone <url>
 
 
-2. fastd status socket
+## 2. fastd status socket
 
 Add the following lines to your fastd.conf
 
@@ -23,7 +23,7 @@ Add the following lines to your fastd.conf
       chmod o+rw /var/run/fastd.ffh-mesh-vpn.sock
     ";
 
-3. Setup
+## 3. Setup
 
 Setup the following cronjob to fill the data in the push-gateway. (Every minute)
 
