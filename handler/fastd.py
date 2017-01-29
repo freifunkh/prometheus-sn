@@ -5,8 +5,12 @@ import json
 import socket
 
 socket_path = sys.argv[1]
+socket_name = sys.argv[2] if len(sys.argv) > 2 else None
 
 def format_output(name, attrs, value):
+    if socket_name is not None:
+        attrs['name'] = socket_name
+
     ret = [ k + '="' + v + '"' for k, v in attrs.items() ]
 
     return name + '{' + ','.join(ret) + '} ' + str(value)
