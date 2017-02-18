@@ -3,6 +3,7 @@
 import sys
 import json
 import socket
+import os.path
 
 socket_path = sys.argv[1]
 socket_name = sys.argv[2] if len(sys.argv) > 2 else None
@@ -31,6 +32,11 @@ def get():
 
 
 def status():
+    if not os.path.exists(socket_path):
+        print(format_output('fastd_peer_count', dict(online='true'), 0))
+        print(format_output('fastd_peer_count', dict(online='false'), 0))
+        return
+
     json_res = get()
     peers = json_res['peers'].values()
 
