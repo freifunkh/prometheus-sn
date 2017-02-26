@@ -46,6 +46,11 @@ def status():
     print(format_output('fastd_peer_count', dict(online='true'), online))
     print(format_output('fastd_peer_count', dict(online='false'), offline))
 
+    statistics = json_res['statistics']
+    for i in ['tx', 'rx', 'rx_reordered', 'tx_dropped', 'tx_error']:
+        print(format_output('fastd_statistics_bytes', dict(counter=i), statistics[i]['bytes']))
+        print(format_output('fastd_statistics_packets', dict(counter=i), statistics[i]['packets']))
+
 
 if __name__ == '__main__':
     status()
