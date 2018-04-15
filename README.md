@@ -1,4 +1,6 @@
-# prometheus gw scripts
+# DEPRECATED prometheus gw scripts
+
+These scripts are now part of the stats_batches role in https://github.com/freifunkh/ansible.
 
 These tools are developed for simple monitoring of some network
 relevated information on the gateways.
